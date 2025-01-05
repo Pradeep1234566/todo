@@ -11,9 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _controller = TextEditingController();
-  List itemlist = [
-    ['Buy Milk', false],
-  ];
+  List itemlist = [];
 
   void OnChanged(int index, bool? value) {
     setState(() {
@@ -22,6 +20,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void SavenewTask() {
+    if (_controller.text.isEmpty) {
+      return;
+    }
     setState(() {
       itemlist.add([_controller.text, false]);
       _controller.clear();
