@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
       itemlist.add([_controller.text, false]);
       _controller.clear();
     });
-     Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
   void CreateNewTask() {
@@ -40,21 +40,27 @@ class _HomePageState extends State<HomePage> {
         });
   }
 
+  void deleteTask(int index) {
+    setState(() {
+      itemlist.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.amber[300],
+        backgroundColor: Colors.amber[100],
         appBar: AppBar(
           title: const Text('Todo App'),
           centerTitle: true,
-          backgroundColor: Colors.amber,
+          backgroundColor: Colors.amber[300],
           elevation: 0,
         ),
         floatingActionButton: FloatingActionButton(
           shape: CircleBorder(),
           onPressed: CreateNewTask,
+          backgroundColor: Colors.amber[500],
           child: const Icon(Icons.add),
-          backgroundColor: Colors.amber[800],
         ),
         body: ListView.builder(
           itemCount: itemlist.length,
@@ -63,6 +69,7 @@ class _HomePageState extends State<HomePage> {
               name: itemlist[index][0],
               isDone: itemlist[index][1],
               onChanged: (value) => OnChanged(index, value),
+              deletefunction: (context) => deleteTask(index),
             );
           },
         ));
