@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/utility/create_task.dart';
 import 'package:todo/utility/todo_tile.dart';
-import 'package:todo/utility/create_task.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,23 +13,30 @@ class _HomePageState extends State<HomePage> {
   final _controller = TextEditingController();
   List itemlist = [
     ['Buy Milk', false],
-    ['Buy Eggs', true],
-    ['Buy Bread', false],
-    ['Buy Butter', false],
-    ['Buy Cheese', false],
   ];
 
   void OnChanged(int index, bool? value) {
     setState(() {
-      itemlist[index][1] = value;
+      itemlist[index][1] = !itemlist[index][1];
     });
+  }
+
+  void SavenewTask() {
+    setState(() {
+      itemlist.add([_controller.text, false]);
+      _controller.clear();
+    });
+     Navigator.of(context).pop();
   }
 
   void CreateNewTask() {
     showDialog(
         context: context,
         builder: (context) {
-          return DialogueBox(controller: _controller);
+          return DialogueBox(
+              controller: _controller,
+              onSave: SavenewTask,
+              onCancel: () => Navigator.of(context).pop());
         });
   }
 

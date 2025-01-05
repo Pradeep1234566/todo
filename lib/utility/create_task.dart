@@ -3,9 +3,9 @@ import 'package:todo/utility/my_button.dart';
 
 class DialogueBox extends StatelessWidget {
   final controller;
-  VoidCallback onSave;
-  VoidCallback onCancel;
-  DialogueBox(
+  final VoidCallback onSave;
+  final VoidCallback onCancel;
+  const DialogueBox(
       {super.key,
       required this.controller,
       required this.onSave,
@@ -35,12 +35,12 @@ class DialogueBox extends StatelessWidget {
             children: [
               MyButton(
                 name: 'Create',
-                onClick: () {},
+                onClick: onSave,
               ),
               const SizedBox(width: 10),
               MyButton(
                 name: 'Cancel',
-                onClick: () {},
+                onClick: onCancel,
               ),
             ],
           ),
